@@ -1,1 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Ton Nom</title>
+    <style>
+        /* === Styles Généraux === */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f7f6; color: #333; line-height: 1.6; }
+        
+        /* === En-tête (Header) === */
+        header { background: #2c3e50; color: #fff; padding: 3rem 1rem; text-align: center; }
+        header h1 { margin-bottom: 0.5rem; font-size: 2.8rem; letter-spacing: 1px; }
+        header p { font-size: 1.2rem; font-weight: 300; color: #ecf0f1; }
+        .contact-links { margin-top: 1rem; }
+        .contact-links a { color: #3498db; margin: 0 10px; text-decoration: none; font-weight: bold; }
+        .contact-links a:hover { color: #2980b9; text-decoration: underline; }
 
+        /* === Conteneur Principal === */
+        .container { max-width: 1000px; margin: -30px auto 20px auto; padding: 0 2rem; position: relative; }
+        
+        /* === Sections === */
+        section { background: #fff; margin-bottom: 2rem; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        h2 { color: #2c3e50; border-bottom: 3px solid #3498db; display: inline-block; padding-bottom: 0.3rem; margin-bottom: 1.5rem; }
+        
+        /* === Compétences === */
+        .skills { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+        .skill-tag { background: #3498db; color: #fff; padding: 0.5rem 1.2rem; border-radius: 20px; font-size: 0.95rem; font-weight: 600; }
+
+        /* === Projets & Expériences === */
+        .grid-container { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+        .card { border: 1px solid #eaeaea; padding: 1.5rem; border-radius: 8px; width: calc(50% - 0.75rem); background: #fafafa; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+        .card h3 { color: #2c3e50; margin-bottom: 0.5rem; }
+        .date { color: #7f8c8d; font-size: 0.9rem; font-style: italic; margin-bottom: 1rem; display: block; }
+
+        /* === Footer === */
+        footer { text-align: center; padding: 2rem; color: #7f8c8d; font-size: 0.9rem; }
+
+        /* === Responsive === */
+        @media(max-width: 768px) {
+            .card { width: 100%; }
+            .container { padding: 0 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Ton Prénom Ton Nom</h1>
+        <p>Développeur Full-Stack | Étudiant en informatique</p>
+        <div class="contact-links">
+            <a href="mailto:tonmail@email.com">Email</a> | 
+            <a href="https://github.com/tonprofil" target="_blank">GitHub</a> | 
+            <a href="https://linkedin.com/in/tonprofil" target="_blank">LinkedIn</a>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <section>
+            <h2>À propos de moi</h2>
+            <p>Passionné par le développement informatique depuis plusieurs années, je suis actuellement en formation [Ton diplôme, ex: BTS SIO option SLAM]. J'aime concevoir des solutions web et logicielles optimisées. Sérieux, autonome et appréciant le travail en équipe, je suis toujours à la recherche de nouveaux défis techniques pour monter en compétences.</p>
+        </section>
+
+        <section>
+            <h2>Compétences Techniques</h2>
+            <div class="skills">
+                <span class="skill-tag">HTML / CSS</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">PHP</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">Java</span>
+                <span class="skill-tag">C#</span>
+                <span class="skill-tag">Git / GitHub</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>Mes Projets</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>Générateur de devis</h3>
+                    <span class="date">Projet personnel - 2024</span>
+                    <p>Développement d'une application de bureau permettant aux entreprises de générer, imprimer et archiver des devis. </p>
+                    <br>
+                    <p><strong>Technos :</strong> HTML/CSS, PHP, JS, ElectronJS</p>
+                </div>
+                <div class="card">
+                    <h3>Site E-commerce</h3>
+                    <span class="date">Projet académique - 2023</span>
+                    <p>Création d'une boutique en ligne complète avec gestion du panier, connexion utilisateur et base de données sécurisée.</p>
+                    <br>
+                    <p><strong>Technos :</strong> PHP, MySQL, Bootstrap</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Expériences & Formations</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>Développeur Junior (Alternance)</h3>
+                    <span class="date">Entreprise XYZ | Sept 2023 - Aujourd'hui</span>
+                    <p>Création d'interfaces clients, développement d'outils internes et gestion de la base de données.</p>
+                </div>
+                <div class="card">
+                    <h3>BTS SIO option SLAM</h3>
+                    <span class="date">École / Lycée | 2022 - 2024</span>
+                    <p>Solutions Logicielles et Applications Métiers. Apprentissage du développement web et lourd, algorithmique et cybersécurité.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Ton Nom. Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>
