@@ -1,1 +1,38 @@
+/* === Styles Généraux === */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background-color: #f4f7f6; color: #333; line-height: 1.6; }
 
+/* === En-tête (Header) === */
+header { background: #2c3e50; color: #fff; padding: 3rem 1rem; text-align: center; }
+header h1 { margin-bottom: 0.5rem; font-size: 2.8rem; letter-spacing: 1px; }
+header p { font-size: 1.2rem; font-weight: 300; color: #ecf0f1; }
+.contact-links { margin-top: 1rem; }
+.contact-links a { color: #3498db; margin: 0 10px; text-decoration: none; font-weight: bold; }
+.contact-links a:hover { color: #2980b9; text-decoration: underline; }
+
+/* === Conteneur Principal === */
+.container { max-width: 1000px; margin: -30px auto 20px auto; padding: 0 2rem; position: relative; }
+
+/* === Sections === */
+section { background: #fff; margin-bottom: 2rem; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+h2 { color: #2c3e50; border-bottom: 3px solid #3498db; display: inline-block; padding-bottom: 0.3rem; margin-bottom: 1.5rem; }
+
+/* === Compétences === */
+.skills { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+.skill-tag { background: #3498db; color: #fff; padding: 0.5rem 1.2rem; border-radius: 20px; font-size: 0.95rem; font-weight: 600; }
+
+/* === Projets & Expériences === */
+.grid-container { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+.card { border: 1px solid #eaeaea; padding: 1.5rem; border-radius: 8px; width: calc(50% - 0.75rem); background: #fafafa; transition: transform 0.2s; }
+.card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+.card h3 { color: #2c3e50; margin-bottom: 0.5rem; }
+.date { color: #7f8c8d; font-size: 0.9rem; font-style: italic; margin-bottom: 1rem; display: block; }
+
+/* === Footer === */
+footer { text-align: center; padding: 2rem; color: #7f8c8d; font-size: 0.9rem; }
+
+/* === Responsive === */
+@media(max-width: 768px) {
+    .card { width: 100%; }
+    .container { padding: 0 1rem; }
+}
