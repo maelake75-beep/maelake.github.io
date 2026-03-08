@@ -3,92 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Maxence - SIO SISR</title>
+    <title>Portfolio BTS SIO | Ton Nom</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
     <header>
-        <div class="header-content">
-            <h1>MAXENCE <span class="highlight">PORTFOLIO</span></h1>
-            <p class="subtitle">Étudiant en BTS SIO option SISR | Cybersécurité & Réseaux</p>
-            <div class="social-links">
-                <a href="#">LinkedIn</a>
-                <a href="#">GitHub</a>
-                <a href="#">Mon CV (PDF)</a>
-            </div>
-        </div>
+        <nav class="navbar">
+            <a href="#" class="logo">Mon Portfolio</a>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#apropos">À Propos</a></li>
+                <li><a href="#competences">Compétences</a></li>
+                <li><a href="#projets">Projets</a></li>
+                <li><a href="#veille">Veille Tech</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <div class="container">
-        
-        <section id="about">
-            <h2><span class="icon">/</span> À propos</h2>
-            <p>Passionné par les infrastructures réseaux et la sécurité informatique, je prépare actuellement un BTS SIO (Services Informatiques aux Organisations) option SISR. Mon objectif est de devenir **Administrateur Systèmes et Réseaux** ou de m'orienter vers la **Cyber-défense**.</p>
-        </section>
+    <section id="accueil" class="hero">
+        <div class="hero-content">
+            <h1>Bonjour, je suis <span>[Ton Prénom Nom]</span></h1>
+            <h2>Étudiant en BTS SIO (Option SLAM/SISR)</h2>
+            <p>Passionné par l'informatique, le développement et les nouvelles technologies.</p>
+            <a href="#projets" class="btn">Voir mes projets</a>
+            <a href="CV.pdf" class="btn btn-outline" target="_blank">Télécharger mon CV</a>
+        </div>
+    </section>
 
-        <section id="skills">
-            <h2><span class="icon">/</span> Compétences Techniques</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Systèmes</h3>
-                    <ul>
-                        <li>Windows Server (AD, DNS, DHCP)</li>
-                        <li>Linux (Debian, Ubuntu Server)</li>
-                        <li>Virtualisation (VMware, VirtualBox)</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Réseaux</h3>
-                    <ul>
-                        <li>Configuration Switch/Routeur (Cisco)</li>
-                        <li>Protocoles (VLAN, STP, OSPF)</li>
-                        <li>Services (VPN, Pare-feu/Firewall)</li>
-                    </ul>
+    <section id="apropos" class="section">
+        <h2 class="section-title">À Propos de moi</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Actuellement en préparation d'un BTS Services Informatiques aux Organisations au sein de [Nom de ton école], je me spécialise en [Solutions Logicielles et Applications Métiers (SLAM) / Solutions d'Infrastructure, Systèmes et Réseaux (SISR)].</p>
+                <p>Ce portfolio retrace mon parcours, mes compétences acquises ainsi que les projets réalisés durant ma formation et en entreprise.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="competences" class="section bg-light">
+        <h2 class="section-title">Mes Compétences</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fa-solid fa-code"></i>
+                <h3>Développement Web</h3>
+                <p>HTML5, CSS3, JavaScript, PHP</p>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-database"></i>
+                <h3>Bases de données</h3>
+                <p>MySQL, PostgreSQL, requêtes SQL</p>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-laptop-code"></i>
+                <h3>Programmation</h3>
+                <p>Python, Java, C#</p>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-server"></i>
+                <h3>Systèmes & Réseaux</h3>
+                <p>Linux, Windows Server, Cisco</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projets" class="section">
+        <h2 class="section-title">Mes Réalisations</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-info">
+                    <h3>Application de Gestion (Mission E4)</h3>
+                    <p>Développement d'une application lourde en C# pour la gestion du personnel d'une entreprise.</p>
+                    <div class="tags">
+                        <span>C#</span>
+                        <span>SQL Server</span>
+                    </div>
+                    <a href="#" class="btn-small">Voir le détail <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
-        </section>
-
-        <section id="projects">
-            <h2><span class="icon">/</span> Projets & Réalisations</h2>
-            <div class="projects-list">
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Mise en place d'un réseau sécurisé</h3>
-                        <span class="tag">Cisco / Packet Tracer</span>
+            <div class="project-card">
+                <div class="project-info">
+                    <h3>Site Vitrine GSB</h3>
+                    <p>Création d'un site web dynamique en PHP/MVC pour le laboratoire Galaxy Swiss Bourdin.</p>
+                    <div class="tags">
+                        <span>PHP</span>
+                        <span>MVC</span>
+                        <span>Bootstrap</span>
                     </div>
-                    <p>Segmentation d'un réseau d'entreprise via des VLANs et routage inter-VLAN avec mise en place d'ACL pour restreindre les accès.</p>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Déploiement Active Directory</h3>
-                        <span class="date">Windows Server</span>
-                    </div>
-                    <p>Installation d'un contrôleur de domaine, gestion des GPO (stratégies de groupe) et déploiement automatisé de logiciels.</p>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Supervision Réseau</h3>
-                        <span class="tag">Zabbix / GLPI</span>
-                    </div>
-                    <p>Installation d'une solution de monitoring pour surveiller l'état des serveurs et remonter les alertes en temps réel.</p>
+                    <a href="#" class="btn-small">Voir le détail <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="veille">
-            <h2><span class="icon">/</span> Veille Technologique</h2>
-            <p>Sujet actuel : <strong>L'évolution des attaques Ransomware et les stratégies de sauvegarde immuable.</strong></p>
-            <p>Outils : Flux RSS, Feedly, Twitter (X) - Comptes de cybersécurité.</p>
-        </section>
+    <section id="veille" class="section bg-light">
+        <h2 class="section-title">Veille Technologique</h2>
+        <div class="veille-content">
+            <h3>Thème : L'Intelligence Artificielle dans le développement Web</h3>
+            <p>Dans le cadre de mon BTS SIO, j'ai choisi de réaliser ma veille technologique sur l'impact des IA génératives (comme GitHub Copilot ou ChatGPT) sur le métier de développeur.</p>
+            <ul>
+                <li>Outils utilisés : Feedly, Google Alerts, Twitter.</li>
+                <li>Sources principales : Developpez.com, Le Monde Informatique, Medium.</li>
+            </ul>
+        </div>
+    </section>
 
-    </div>
+    <section id="contact" class="section">
+        <h2 class="section-title">Contactez-moi</h2>
+        <div class="contact-container">
+            <p>Vous souhaitez me proposer un stage, une alternance ou simplement échanger ?</p>
+            <div class="contact-links">
+                <a href="mailto:ton.email@email.com"><i class="fa-solid fa-envelope"></i> ton.email@email.com</a>
+                <a href="https://linkedin.com/in/tonprofil" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                <a href="https://github.com/tonprofil" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
+        </div>
+    </section>
 
     <footer>
-        <p>Portfolio SISR - Maxence © 2026</p>
+        <p>&copy; 2026 - [Ton Prénom Nom] | Portfolio BTS SIO</p>
     </footer>
 
 </body>
