@@ -3,56 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portfolio</title>
+    <title>Accueil | Portfolio BTS SIO | Youssouf HATHOUTI</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
     <header>
-        <nav>
-            <div class="logo">MonPortfolio.</div>
-            <ul class="nav-links">
-                <li><a href="#about">À propos</a></li>
-                <li><a href="#projects">Projets</a></li>
-                <li><a href="#contact">Contact</a></li>
+        <nav class="sidebar">
+            <div class="profile-area">
+                <div class="avatar">YH</div>
+                <h1>Youssouf HATHOUTI</h1>
+                <p>Étudiant BTS SIO</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#accueil"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="#parcours"><i class="fas fa-user"></i> Mon Parcours</a></li>
+                <li><a href="#competences"><i class="fas fa-code"></i> Compétences</a></li>
+                <li><a href="#projets"><i class="fas fa-tasks"></i> Réalisations (E4/E6)</a></li>
+                <li><a href="#veille"><i class="fas fa-rss"></i> Veille Tech</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <section id="hero">
-        <div class="hero-content">
-            <h1>Bonjour, je suis <span class="highlight">Ton Nom</span></h1>
-            <p>Développeur Web & Créatif</p>
-            <a href="#projects" class="btn">Voir mes projets</a>
-        </div>
-    </section>
+    <main class="content">
+        <section id="accueil" class="hero-section">
+            <div class="overlay">
+                <h1>Bienvenue sur mon Portfolio</h1>
+                <p>Futur technicien supérieur aux services informatiques</p>
+                <div class="cta-group">
+                    <a href="#projets" class="btn-main">Explorer mes travaux</a>
+                    <a href="#" class="btn-sub">Télécharger mon CV</a>
+                </div>
+            </div>
+        </section>
 
-    <section id="projects">
-        <h2>Mes Projets</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <h3>Projet 1</h3>
-                <p>Une courte description de ce super projet.</p>
+        <section id="parcours" class="section">
+            <h2 class="title">Mon Parcours</h2>
+            <div class="timeline">
+                <div class="time-item">
+                    <span class="date">2024 - 2026</span>
+                    <h3>BTS SIO</h3>
+                    <p>Option SLAM / SISR - [Ton École]</p>
+                </div>
+                <div class="time-item">
+                    <span class="date">2023</span>
+                    <h3>Baccalauréat</h3>
+                    <p>Mention Bien - [Ton Lycée]</p>
+                </div>
             </div>
-            <div class="project-card">
-                <h3>Projet 2</h3>
-                <p>Une courte description de ce super projet.</p>
-            </div>
-            <div class="project-card">
-                <h3>Projet 3</h3>
-                <p>Une courte description de ce super projet.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <footer id="contact">
-        <h2>Travaillons ensemble !</h2>
-        <p>Email: contact@tonemail.com</p>
-        <div class="socials">
-            <a href="#">LinkedIn</a> | <a href="#">GitHub</a>
-        </div>
-        <p class="copyright">© 2026 Ton Nom. Tous droits réservés.</p>
-    </footer>
+        <section id="projets" class="section gray-bg">
+            <h2 class="title">Mes Réalisations Professionnelles</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Épreuve E4</h3>
+                    <p>Support de situation professionnelle : Développement d'une application de gestion.</p>
+                    <a href="#" class="link">Détails <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3>Épreuve E6</h3>
+                    <p>Parcours de professionnalisation et analyse de services informatiques.</p>
+                    <a href="#" class="link">Détails <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon"><i class="fas fa-building"></i></div>
+                    <h3>Stages</h3>
+                    <p>Mise en situation réelle en entreprise sur 10 semaines.</p>
+                    <a href="#" class="link">Détails <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="veille" class="section">
+            <h2 class="title">Veille Technologique</h2>
+            <div class="veille-box">
+                <p>Suivi de l'évolution de la <strong>Cybersécurité</strong> et de la <strong>Conteneurisation (Docker/Kubernetes)</strong>.</p>
+                <p>Outils utilisés : Flux RSS, Twitter, Veille thématique.</p>
+            </div>
+        </section>
+    </main>
 
 </body>
 </html>
