@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil | Portfolio BTS SIO OPTION SISR | Mael AKE</title>
+    <title>Accueil | Portfolio BTS SIO SISR | Mael AKE</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -14,15 +14,13 @@
             <div class="profile-area">
                 <div class="avatar">MA</div>
                 <h1>Mael AKE</h1>
-                <p>Étudiant BTS SIO OPTION SISR</p>
+                <p>Étudiant BTS SIO SISR</p>
             </div>
             <ul class="nav-menu">
-                <li><a href="#accueil"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="#parcours"><i class="fas fa-user"></i> Mon Parcours</a></li>
-                <li><a href="#competences"><i class="fas fa-code"></i> Compétences</a></li>
-                <li><a href="#projets"><i class="fas fa-tasks"></i> Réalisations (E4/E6)</a></li>
-                <li><a href="#veille"><i class="fas fa-rss"></i> Veille Tech</a></li>
-                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="parcours.html"><i class="fas fa-user"></i> Mon Parcours</a></li>
+                <li><a href="competences.html"><i class="fas fa-code"></i> Compétences</a></li>
+                <li><a href="projets.html"><i class="fas fa-tasks"></i> Réalisations</a></li>
             </ul>
         </nav>
     </header>
@@ -31,94 +29,13 @@
         <section id="accueil" class="hero-section">
             <div class="overlay">
                 <h1>Bienvenue sur mon Portfolio</h1>
-                <p>Futur technicien supérieur aux services informatiques</p>
+                <p>Futur technicien supérieur en services informatiques (SISR)</p>
                 <div class="cta-group">
-                    <a href="#projets" class="btn-main">Explorer mes travaux</a>
-                    <a href="CV_professionnel_gris_simple.pdf" class="btn-sub" download>
-                        <i class="fas fa-download"></i> Télécharger mon CV
+                    <a href="projets.html" class="btn-main">Explorer mes travaux</a>
+                    <a href="CV professionnel gris simple.pdf" class="btn-sub" target="_blank">
+                        <i class="fas fa-file-pdf"></i> Voir mon CV
                     </a>
                 </div>
-            </div>
-        </section>
-
-        <section id="parcours" class="section">
-            <h2 class="title">Mon Parcours</h2>
-            <div class="timeline">
-                <div class="time-item">
-                    <span class="date">2024 - 2026</span>
-                    <h3>BTS SIO Option SISR</h3>
-                    <p>Lycée Polyvalent de Cachan </p>
-                </div>
-                <div class="time-item">
-                    <span class="date">2024</span>
-                    <h3>Baccalauréat SN</h3>
-                    <p>Lycée Gustave Ferrié </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="competences" class="section gray-bg">
-            <h2 class="title">Mes Compétences</h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Logiciels & Outils</h3>
-                    <ul>
-                        <li>Packet Tracer [cite: 39]</li>
-                        <li>VirtualBox [cite: 40]</li>
-                        <li>Visual Studio Code [cite: 41]</li>
-                        <li>IPCop [cite: 42]</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Technique</h3>
-                    <ul>
-                        <li>Maintenance réseau et dépannage [cite: 30, 31]</li>
-                        <li>Montage et configuration Hardware [cite: 18, 20]</li>
-                        <li>Administration (Gestion des droits d'accès) [cite: 34]</li>
-                        <li>HTML / CSS [cite: 13, 15]</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="projets" class="section">
-            <h2 class="title">Mes Réalisations Professionnelles</h2>
-            <div class="project-grid">
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-network-wired"></i></div>
-                    <h3>Maintenance Réseau</h3>
-                    <p>Prise en main à distance et dépannage de machines[cite: 31, 33].</p>
-                    <a href="#" class="link">Détails <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-tools"></i></div>
-                    <h3>Montage PC</h3>
-                    <p>Configuration sur mesure en fonction des besoins clients[cite: 18, 23].</p>
-                    <a href="#" class="link">Détails <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-globe"></i></div>
-                    <h3>Webmastering</h3>
-                    <p>Maintenance de sites internet (HTML/CSS/Photoshop)[cite: 12, 13, 15, 16].</p>
-                    <a href="#" class="link">Détails <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </section>
-
-        <section id="veille" class="section gray-bg">
-            <h2 class="title">Veille Technologique</h2>
-            <div class="veille-box">
-                <p>Suivi de l'évolution de la <strong>Cybersécurité</strong> et de la <strong>Conteneurisation (Docker/Kubernetes)</strong>.</p>
-                <p>Outils utilisés : Flux RSS, Twitter, Veille thématique.</p>
-            </div>
-        </section>
-
-        <section id="contact" class="section">
-            <h2 class="title">Me Contacter</h2>
-            <div class="contact-info">
-                <p><i class="fas fa-envelope"></i> <strong>Email :</strong> maelake75@gmail.com [cite: 3]</p>
-                <p><i class="fas fa-phone"></i> <strong>Téléphone :</strong> 07 51 49 10 67 [cite: 5]</p>
-                <p><i class="fas fa-map-marker-alt"></i> <strong>Adresse :</strong> 10 Rue Ernestine [cite: 2]</p>
             </div>
         </section>
     </main>
