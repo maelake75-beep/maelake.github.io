@@ -1,0 +1,22 @@
+<section class="section">
+    <h2 class="title">Ma Veille Technologique (2024-2026)</h2>
+    <div class="veille-box">
+        <h3>L'évolution de la sécurité périmétrique : Du VPN au ZTNA</h3>
+        <p><strong>Problématique :</strong> Pourquoi le modèle de sécurité "périmétrique" (VPN) est-il devenu obsolète face aux menaces actuelles ?</p>
+        
+        <div style="margin-top: 20px;">
+            <h4><i class="fas fa-history"></i> 2024 : L'année de la transition</h4>
+            <p>Le télétravail massif a montré les limites des VPN (vulnérabilités critiques, accès trop large au réseau une fois connecté). Les entreprises commencent à adopter le modèle "Ne jamais faire confiance, toujours vérifier".</p>
+            
+            <h4><i class="fas fa-chart-line"></i> 2025 : La généralisation du SASE</h4>
+            <p>Apparition du concept SASE (Secure Access Service Edge) qui fusionne le réseau (SD-WAN) et la sécurité dans le Cloud. Les pare-feux ne sont plus seulement physiques mais dématérialisés.</p>
+            
+            <h4><i class="fas fa-shield-alt"></i> 2026 : Le standard Zero Trust</h4>
+            <p>Aujourd'hui, l'accès au réseau ne dépend plus de "où" on se connecte, mais de "qui" se connecte (MFA, état de santé du PC, biométrie). Le réseau est segmenté de manière dynamique.</p>
+        </div>
+
+        <p style="margin-top: 20px;">
+            <strong>Outils de veille :</strong> Flux RSS (ANSSI, Le Monde Informatique), Google Alerts, Newsletter spécialisée en Cybersécurité.
+        </p>
+    </div>
+</section>
