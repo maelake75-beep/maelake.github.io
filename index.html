@@ -1,46 +1,1013 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil | Portfolio Mael AKE</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mael AKE — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:  #a78bfa;
+  --accent2: #818cf8;
+  --accent3: #c4b5fd;
+  --white:   #f0edff;
+  --muted:   rgba(200,190,255,.5);
+  --muted2:  rgba(200,190,255,.3);
+  --glass:        rgba(255,255,255,.06);
+  --glass-hover:  rgba(255,255,255,.10);
+  --glass-border: rgba(255,255,255,.12);
+  --glass-border-hover: rgba(255,255,255,.25);
+  --section-pad: clamp(5rem, 10vw, 9rem);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #080808;
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+  min-height: 100vh;
+}
+
+/* CANVAS */
+#bg-canvas {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+}
+
+nav, .page, footer { position: relative; z-index: 1; }
+
+/* CURSOR */
+.cursor {
+  width: 8px; height: 8px; background: var(--accent3);
+  border-radius: 50%; position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s;
+}
+.cursor-ring {
+  width: 32px; height: 32px;
+  border: 1px solid rgba(167,139,250,.4); border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+}
+body:has(a:hover) .cursor,
+body:has(button:hover) .cursor { width: 14px; height: 14px; background: #c4b5fd; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.5rem 4rem; z-index: 100;
+  background: rgba(4,4,4,.75);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700; font-size: 1.3rem;
+  letter-spacing: .04em; color: var(--white); text-decoration: none;
+  cursor: pointer;
+}
+.nav-logo span { color: var(--accent); font-style: italic; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-size: .75rem; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  cursor: pointer; transition: color .2s;
+  position: relative; padding-bottom: 3px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 1px; background: var(--accent);
+  transform: scaleX(0); transform-origin: left; transition: transform .25s;
+}
+.nav-links a:hover { color: var(--accent3); }
+.nav-links a:hover::after,
+.nav-links a.active::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--accent3); }
+
+/* SPA PAGES */
+.page {
+  display: none;
+  min-height: 100vh;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .45s cubic-bezier(.22,1,.36,1), transform .45s cubic-bezier(.22,1,.36,1);
+}
+.page.active { display: block; }
+.page.visible { opacity: 1; transform: none; }
+.page.leaving {
+  opacity: 0; transform: translateY(-12px);
+  transition: opacity .22s ease, transform .22s ease;
+  pointer-events: none;
+}
+
+/* SECTION BASE */
+.page section { padding: var(--section-pad) 4rem; }
+
+.section-label {
+  font-size: .68rem; font-weight: 500;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: .9rem;
+  display: flex; align-items: center; gap: .75rem;
+}
+.section-label::before {
+  content: ''; width: 1.5rem; height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700; font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.05; letter-spacing: -.01em;
+  margin-bottom: 3.5rem; color: var(--white);
+}
+.section-title em { font-style: italic; color: var(--accent3); }
+
+/* FOOTER */
+footer {
+  padding: 2rem 4rem;
+  border-top: 1px solid rgba(255,255,255,.06);
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: .72rem; color: var(--muted);
+  background: rgba(4,4,4,.6);
+  backdrop-filter: blur(12px);
+}
+
+/* BUTTONS */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  color: #fff; font-family: 'DM Sans', sans-serif; font-weight: 500;
+  font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+  padding: .9rem 2.2rem; border-radius: 99px; text-decoration: none;
+  border: none; cursor: pointer;
+  transition: opacity .2s, transform .2s;
+}
+.btn-primary:hover { opacity: .9; transform: translateY(-2px); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: rgba(167,139,250,.08); color: var(--accent3);
+  font-family: 'DM Sans', sans-serif; font-weight: 500;
+  font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+  padding: .9rem 2.2rem; border-radius: 99px; text-decoration: none;
+  border: 1px solid rgba(167,139,250,.3); cursor: pointer;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.btn-outline:hover { background: rgba(167,139,250,.15); border-color: var(--accent3); transform: translateY(-2px); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; padding: 0 4rem; position: relative;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .68rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--accent3); background: rgba(167,139,250,.1);
+  border: 1px solid rgba(167,139,250,.25);
+  padding: .4rem 1.1rem; border-radius: 99px; margin-bottom: 2rem;
+}
+.hero-tag::before {
+  content: ''; width: 6px; height: 6px; background: var(--accent);
+  border-radius: 50%; animation: pulseDot 2s ease-in-out infinite;
+}
+.hero-name {
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  font-size: clamp(3.8rem, 7vw, 7rem);
+  line-height: .95; letter-spacing: -.02em; margin-bottom: 1.2rem;
+}
+.hero-name em { font-style: italic; color: var(--accent3); }
+.hero-title {
+  font-size: clamp(.95rem, 1.8vw, 1.2rem); font-weight: 300;
+  color: var(--muted); letter-spacing: .05em; margin-bottom: 2.5rem;
+}
+.hero-desc {
+  font-size: .93rem; line-height: 1.85; color: rgba(200,190,255,.55);
+  max-width: 420px; margin-bottom: 3rem;
+}
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-right { position: relative; display: flex; justify-content: center; align-items: center; }
+.hero-visual { position: relative; width: 340px; height: 430px; }
+.profile-card {
+  position: absolute; inset: 0;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 24px; backdrop-filter: blur(20px); overflow: hidden;
+}
+.profile-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent3), transparent);
+}
+.profile-card-inner {
+  position: absolute; inset: 2rem;
+  display: flex; flex-direction: column; gap: 1.4rem;
+}
+.profile-avatar {
+  width: 68px; height: 68px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  font-size: 1.5rem; color: #fff; border: 2px solid rgba(167,139,250,.3);
+}
+.profile-name { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.2rem; }
+.profile-role { font-size: .74rem; color: var(--muted); margin-top: .2rem; }
+.profile-divider { height: 1px; background: rgba(255,255,255,.07); }
+.profile-stat { display: flex; flex-direction: column; gap: .8rem; }
+.stat-row { display: flex; align-items: center; font-size: .76rem; }
+.stat-lbl { color: var(--muted); min-width: 100px; }
+.stat-bar { flex:1; height: 2px; background: rgba(255,255,255,.07); border-radius: 2px; overflow: hidden; margin: 0 .7rem; }
+.stat-fill { height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent3)); border-radius: 2px; }
+.stat-pct { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: .82rem; color: var(--accent3); min-width: 28px; text-align: right; }
+.floating-badge {
+  position: absolute; background: rgba(20,12,50,.8);
+  backdrop-filter: blur(12px); border: 1px solid rgba(167,139,250,.2);
+  border-radius: 12px; padding: .7rem 1rem; font-size: .72rem;
+  display: flex; align-items: center; gap: .5rem;
+  animation: floatBadge 3.5s ease-in-out infinite;
+}
+.floating-badge .dot {
+  width: 6px; height: 6px; background: var(--accent);
+  border-radius: 50%; flex-shrink: 0; animation: pulseDot 2s ease-in-out infinite;
+}
+.fb1 { bottom: -1.5rem; left: -2rem; }
+.fb2 { top: 1rem; right: -2rem; animation-delay: 1.8s; }
+@keyframes floatBadge { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+@keyframes pulseDot { 0%,100%{opacity:1} 50%{opacity:.35} }
+
+/* ─── ABOUT ─── */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.about-text { font-size: .97rem; line-height: 1.95; color: rgba(200,190,255,.6); }
+.about-text p + p { margin-top: 1.3rem; }
+.about-text strong { color: var(--white); font-weight: 500; }
+.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.about-quote {
+  margin-top: 3rem; padding: 1.5rem 2rem;
+  background: rgba(167,139,250,.06);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 12px 12px 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 1.1rem; color: var(--accent3); line-height: 1.7;
+}
+.stat-card {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 16px; padding: 1.5rem; backdrop-filter: blur(12px);
+  transition: background .2s, border-color .2s;
+}
+.stat-card:hover { background: var(--glass-hover); border-color: var(--glass-border-hover); }
+.stat-card .num {
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  font-size: 2.8rem; color: var(--accent3); line-height: 1; margin-bottom: .5rem;
+}
+.stat-card .lbl { font-size: .78rem; color: var(--muted); line-height: 1.4; }
+
+/* ─── SKILLS ─── */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+.skill-group {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 20px; padding: 2rem; backdrop-filter: blur(14px);
+  transition: background .25s, border-color .25s, transform .25s;
+}
+.skill-group:hover { background: var(--glass-hover); border-color: rgba(167,139,250,.3); transform: translateY(-4px); }
+.skill-group-icon {
+  width: 42px; height: 42px; border-radius: 12px;
+  background: rgba(167,139,250,.12); border: 1px solid rgba(167,139,250,.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; margin-bottom: 1.25rem;
+}
+.skill-group-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 600;
+  font-size: 1.05rem; margin-bottom: 1rem; color: var(--white);
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+.skill-tag {
+  font-size: .72rem; color: var(--accent3);
+  background: rgba(167,139,250,.08); border: 1px solid rgba(167,139,250,.18);
+  padding: .28rem .8rem; border-radius: 99px; transition: background .2s;
+}
+.skill-tag:hover { background: rgba(167,139,250,.2); }
+
+/* ─── XP ─── */
+.xp-list { display: flex; flex-direction: column; }
+.xp-item {
+  display: grid; grid-template-columns: 190px 1fr;
+  gap: 3rem; padding: 2.5rem 0;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.xp-item:last-child { border-bottom: 1px solid rgba(255,255,255,.06); }
+.xp-date { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: .9rem; color: var(--accent); letter-spacing: .04em; padding-top: .2rem; }
+.xp-cat { font-size: .68rem; color: var(--muted2); margin-top: .35rem; letter-spacing: .1em; text-transform: uppercase; }
+.xp-title { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.15rem; margin-bottom: .7rem; color: var(--white); }
+.xp-tasks { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
+.xp-tasks li { font-size: .87rem; color: var(--muted); line-height: 1.6; display: flex; align-items: baseline; gap: .6rem; }
+.xp-tasks li::before { content: '◆'; color: var(--accent); font-size: .45rem; flex-shrink: 0; position: relative; top: -1px; }
+
+/* ─── EDUCATION ─── */
+.edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+.edu-card {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 20px; padding: 2.2rem; backdrop-filter: blur(14px);
+  position: relative; overflow: hidden;
+  transition: background .25s, border-color .25s, transform .25s;
+}
+.edu-card:hover { background: var(--glass-hover); border-color: rgba(167,139,250,.3); transform: translateY(-4px); }
+.edu-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transform: scaleX(0); transform-origin: left; transition: transform .4s;
+}
+.edu-card:hover::before { transform: scaleX(1); }
+.edu-year { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 3rem; color: rgba(167,139,250,.12); line-height: 1; margin-bottom: 1rem; }
+.edu-degree { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.2rem; margin-bottom: .4rem; }
+.edu-school { font-size: .82rem; color: var(--muted); }
+.edu-badge {
+  display: inline-block; margin-top: 1rem;
+  font-size: .68rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent3); background: rgba(167,139,250,.1);
+  border: 1px solid rgba(167,139,250,.25);
+  padding: .25rem .9rem; border-radius: 99px;
+}
+
+/* ─── CONTACT ─── */
+#page-contact section {
+  min-height: calc(100vh - 120px);
+  display: flex; align-items: center; justify-content: center; text-align: center;
+}
+.contact-inner { max-width: 580px; margin: 0 auto; position: relative; z-index: 2; }
+.contact-glow {
+  position: absolute; width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(167,139,250,.1) 0%, transparent 70%);
+  pointer-events: none; top: 50%; left: 50%; transform: translate(-50%,-50%);
+}
+.contact-email {
+  display: inline-flex; align-items: center; gap: .75rem;
+  font-family: 'Cormorant Garamond', serif; font-weight: 600;
+  font-size: clamp(1.3rem, 3vw, 2rem); color: var(--white); text-decoration: none;
+  margin: 2.5rem 0; padding-bottom: .25rem;
+  border-bottom: 1px solid rgba(167,139,250,.3);
+  transition: color .2s, border-color .2s;
+}
+.contact-email:hover { color: var(--accent3); border-color: var(--accent); }
+.contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+.contact-pill {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .78rem; color: var(--muted);
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09);
+  padding: .5rem 1.2rem; border-radius: 99px;
+  transition: color .2s, border-color .2s, background .2s;
+}
+.contact-pill:hover { color: var(--accent3); border-color: rgba(167,139,250,.3); background: rgba(167,139,250,.08); }
+
+/* ─── WIFI 7 ARTICLE ─── */
+.wifi7-article {
+  margin: 1rem 0 4rem;
+  background: rgba(167,139,250,.04);
+  border: 1px solid rgba(167,139,250,.15);
+  border-radius: 24px; padding: 3rem;
+  backdrop-filter: blur(10px);
+}
+.wifi7-header { margin-bottom: 2.5rem; }
+.wifi7-label {
+  font-size: .62rem; font-weight: 500; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--accent);
+  display: flex; align-items: center; gap: .6rem; margin-bottom: .8rem;
+}
+.wifi7-label::before { content:''; width:1.2rem; height:1px; background:var(--accent); }
+.wifi7-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  font-size: clamp(1.6rem, 3vw, 2.4rem); line-height: 1.1;
+  color: var(--white); margin-bottom: .8rem;
+}
+.wifi7-title em { font-style: italic; color: var(--accent3); }
+.wifi7-sub { font-size: .75rem; color: var(--muted2); letter-spacing: .04em; }
+.wifi7-intro {
+  font-size: .93rem; line-height: 1.9; color: rgba(200,190,255,.65);
+  margin-bottom: 2.5rem; max-width: 800px;
+}
+.wifi7-intro strong { color: var(--white); font-weight: 500; }
+
+/* compare bars */
+.wifi7-compare {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  margin-bottom: 3rem;
+}
+.wc-card {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 16px; padding: 1.5rem; backdrop-filter: blur(10px);
+}
+.wc-featured { border-color: rgba(167,139,250,.35); background: rgba(167,139,250,.08); }
+.wc-label { font-size: .68rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .6rem; }
+.wc-val { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 2.5rem; color: var(--muted); line-height: 1; margin-bottom: .8rem; }
+.wc-val span { font-size: 1rem; }
+.wc-bar-wrap { height: 4px; background: rgba(255,255,255,.07); border-radius: 4px; overflow: hidden; margin-bottom: .6rem; }
+.wc-bar { height: 100%; background: rgba(167,139,250,.4); border-radius: 4px; }
+.wc-detail { font-size: .72rem; color: var(--muted2); }
+
+/* innovations list */
+.wifi7-innovations { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 3rem; }
+.wi-item {
+  display: grid; grid-template-columns: 60px 1fr; gap: 1.5rem; align-items: start;
+  padding: 1.5rem; background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 16px; backdrop-filter: blur(10px);
+  transition: background .2s, border-color .2s;
+}
+.wi-item:hover { background: var(--glass-hover); border-color: rgba(167,139,250,.25); }
+.wi-num {
+  font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 2rem;
+  color: rgba(167,139,250,.2); line-height: 1; text-align: center; padding-top: .2rem;
+}
+.wi-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  font-size: 1.1rem; color: var(--white); margin-bottom: .5rem;
+}
+.wi-desc { font-size: .85rem; color: var(--muted); line-height: 1.75; }
+.wi-desc strong { color: var(--accent3); font-weight: 500; }
+
+/* impact */
+.wifi7-impact { background: rgba(167,139,250,.06); border: 1px solid rgba(167,139,250,.15); border-radius: 16px; padding: 2rem; }
+.wi-impact-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  font-size: 1.2rem; color: var(--white); margin-bottom: 1.5rem;
+}
+.wi-impact-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+.wi-impact-card {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
+  border-radius: 12px; padding: 1.2rem;
+  transition: background .2s, border-color .2s;
+}
+.wi-impact-card:hover { background: rgba(167,139,250,.1); border-color: rgba(167,139,250,.25); }
+.wi-impact-icon { font-size: 1.3rem; margin-bottom: .6rem; }
+.wi-impact-label { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: .95rem; color: var(--accent3); margin-bottom: .4rem; }
+.wi-impact-desc { font-size: .75rem; color: var(--muted); line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .wifi7-article { padding: 1.5rem; }
+  .wifi7-compare { grid-template-columns: 1fr; }
+  .wi-impact-grid { grid-template-columns: 1fr; }
+  .wi-item { grid-template-columns: 40px 1fr; gap: 1rem; }
+}
+
+/* ─── VEILLE ─── */
+.veille-intro {
+  font-size: .97rem; line-height: 1.9; color: rgba(200,190,255,.6);
+  max-width: 650px; margin-bottom: 3.5rem;
+}
+.veille-intro strong { color: var(--white); font-weight: 500; }
+.veille-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-bottom: 4rem; }
+.veille-card {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 20px; padding: 1.8rem; backdrop-filter: blur(14px);
+  position: relative; overflow: hidden;
+  transition: background .25s, border-color .25s, transform .25s;
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.veille-card:hover { background: var(--glass-hover); border-color: rgba(167,139,250,.3); transform: translateY(-4px); }
+.veille-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transform: scaleX(0); transform-origin: left; transition: transform .4s;
+}
+.veille-card:hover::before { transform: scaleX(1); }
+.veille-icon {
+  width: 46px; height: 46px; border-radius: 14px;
+  background: rgba(167,139,250,.12); border: 1px solid rgba(167,139,250,.2);
+  display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+}
+.veille-theme {
+  font-size: .62rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: .2rem;
+}
+.veille-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  font-size: 1.05rem; color: var(--white); line-height: 1.2;
+}
+.veille-desc { font-size: .8rem; color: var(--muted); line-height: 1.7; flex: 1; }
+.veille-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: auto; padding-top: .5rem; }
+.veille-tag {
+  font-size: .65rem; color: var(--accent3);
+  background: rgba(167,139,250,.08); border: 1px solid rgba(167,139,250,.15);
+  padding: .2rem .65rem; border-radius: 99px;
+}
+.veille-sources-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  font-size: 1.5rem; color: var(--white); margin-bottom: 1.5rem;
+}
+.veille-sources-title em { font-style: italic; color: var(--accent3); }
+.veille-sources { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.vsource {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 14px; padding: 1.2rem; backdrop-filter: blur(12px);
+  display: flex; flex-direction: column; gap: .5rem;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.vsource:hover { background: var(--glass-hover); border-color: rgba(167,139,250,.3); transform: translateY(-3px); }
+.vsource-name { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: .95rem; color: var(--white); }
+.vsource-type { font-size: .65rem; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; }
+.vsource-desc { font-size: .75rem; color: var(--muted); line-height: 1.5; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 1.25rem 1.5rem; }
+  .nav-links { display: none; }
+  .page section { padding: 5rem 1.5rem; }
+  footer { flex-direction: column; gap: .5rem; text-align: center; padding: 1.5rem; }
+  .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 4rem; }
+  .hero-right { display: none; }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .xp-item { grid-template-columns: 1fr; gap: .6rem; }
+  .edu-grid { grid-template-columns: 1fr; }
+  .veille-grid { grid-template-columns: 1fr; }
+  .veille-sources { grid-template-columns: 1fr 1fr; }
+}
+</style>
 </head>
 <body>
 
-    <header>
-        <nav class="sidebar">
-            <div class="profile-area">
-                <div class="avatar">MA</div>
-                <h1>Mael AKE</h1>
-                <p>Étudiant BTS SIO SISR</p>
-            </div>
-            <ul class="nav-menu">
-                 <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="veille.html"><i class="fas fa-rss"></i> Veille</a></li>
-                <li><a href="parcours.html"><i class="fas fa-user"></i> Mon Parcours</a></li>
-                <li><a href="competences.html"><i class="fas fa-code"></i> Compétences</a></li>
-                <li><a href="projets.html"><i class="fas fa-tasks"></i> Réalisations</a></li>
-            </ul>
-        </nav>
-    </header>
+<canvas id="bg-canvas"></canvas>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-    <main class="content">
-        <section id="accueil" class="hero-section">
-            <div class="overlay">
-                <h1>Bienvenue sur mon Portfolio</h1>
-                <p>Futur technicien supérieur en services informatiques</p>
-                <div class="cta-group">
-                    <a href="parcours.html" class="btn-main">Découvrir mon parcours</a>
-                    
-                    <a href="CV professionnel gris simple.pdf" class="btn-sub" target="_blank">
-                        <i class="fas fa-eye"></i> Voir mon CV
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" data-page="home">Mael <span>AKE</span></a>
+  <ul class="nav-links">
+    <li><a data-page="about">À propos</a></li>
+    <li><a data-page="skills">Compétences</a></li>
+    <li><a data-page="xp">Expériences</a></li>
+    <li><a data-page="edu">Formation</a></li>
+    <li><a data-page="veille">Veille</a></li>
+    <li><a data-page="contact">Contact</a></li>
+  </ul>
+</nav>
 
+<!-- ═══════════ PAGE HOME ═══════════ -->
+<div class="page" id="page-home">
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">Disponible pour alternance</div>
+      <h1 class="hero-name">Mael<br><em>AKE</em></h1>
+      <p class="hero-title">Étudiant en Réseau &amp; IT</p>
+      <p class="hero-desc">Passionné par les infrastructures réseau, la maintenance informatique et les systèmes. En BTS SIO, je construis les compétences pour concevoir et maintenir des systèmes fiables.</p>
+      <div class="hero-cta">
+        <a class="btn-primary" data-page="xp">Mes expériences →</a>
+        <a class="btn-outline" data-page="contact">Me contacter</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-visual">
+        <div class="profile-card"></div>
+        <div class="profile-card-inner">
+          <div class="profile-avatar">MA</div>
+          <div>
+            <div class="profile-name">Mael AKE</div>
+            <div class="profile-role">Étudiant BTS SIO · Paris</div>
+          </div>
+          <div class="profile-divider"></div>
+          <div class="profile-stat">
+            <div class="stat-row"><span class="stat-lbl">Réseau</span><div class="stat-bar"><div class="stat-fill" style="width:82%"></div></div><span class="stat-pct">82%</span></div>
+            <div class="stat-row"><span class="stat-lbl">Hardware</span><div class="stat-bar"><div class="stat-fill" style="width:90%"></div></div><span class="stat-pct">90%</span></div>
+            <div class="stat-row"><span class="stat-lbl">Web CSS/HTML</span><div class="stat-bar"><div class="stat-fill" style="width:65%"></div></div><span class="stat-pct">65%</span></div>
+            <div class="stat-row"><span class="stat-lbl">Virtualisation</span><div class="stat-bar"><div class="stat-fill" style="width:75%"></div></div><span class="stat-pct">75%</span></div>
+          </div>
+        </div>
+        <div class="floating-badge fb1"><span class="dot"></span><span style="color:#d4cbff;font-size:.72rem;">BTS SIO 2024–2026</span></div>
+        <div class="floating-badge fb2"><span class="dot"></span><span style="color:#d4cbff;font-size:.72rem;">4 expériences</span></div>
+      </div>
+    </div>
+  </section>
+  <footer><span>© 2025 Mael AKE</span><span>Étudiant en Réseau · Paris</span></footer>
+</div>
+
+<!-- ═══════════ PAGE ABOUT ═══════════ -->
+<div class="page" id="page-about">
+  <section>
+    <div class="section-label reveal">À propos</div>
+    <h2 class="section-title reveal">Un profil technique<br><em>orienté réseau.</em></h2>
+    <div class="about-grid">
+      <div>
+        <div class="about-text reveal">
+          <p>Je m'appelle <strong>Mael AKE</strong>, étudiant en BTS SIO (Services Informatiques aux Organisations) au Lycée de Cachan, passionné par les réseaux informatiques et la maintenance de systèmes.</p>
+          <p>Mon parcours combine des expériences concrètes : montage de PC sur mesure, maintenance de sites web, administration réseau et même un passage en restauration qui m'a forgé la <strong>rigueur et la gestion du stress</strong>.</p>
+          <p>Je maîtrise des outils comme <strong>Packet Tracer, Virtual Box et Ipcop</strong>, et j'aime autant configurer une infrastructure réseau que démonter et remonter un PC.</p>
+          <p>Curieux et motivé, j'ai voyagé en <strong>Côte d'Ivoire et au Sri Lanka</strong>, ce qui m'a ouvert l'esprit et renforcé mon adaptabilité culturelle.</p>
+        </div>
+        <div class="about-quote reveal">"La technique sans la rigueur ne mène nulle part — j'ai appris les deux en même temps."</div>
+      </div>
+      <div class="about-stats reveal">
+        <div class="stat-card"><div class="num">4</div><div class="lbl">Expériences professionnelles</div></div>
+        <div class="stat-card"><div class="num">2</div><div class="lbl">Diplômes obtenus / en cours</div></div>
+        <div class="stat-card"><div class="num">2</div><div class="lbl">Pays visités</div></div>
+        <div class="stat-card"><div class="num">4+</div><div class="lbl">Logiciels techniques maîtrisés</div></div>
+      </div>
+    </div>
+  </section>
+  <footer><span>© 2025 Mael AKE</span><span>Étudiant en Réseau · Paris</span></footer>
+</div>
+
+<!-- ═══════════ PAGE SKILLS ═══════════ -->
+<div class="page" id="page-skills">
+  <section>
+    <div class="section-label reveal">Compétences</div>
+    <h2 class="section-title reveal">Ce que je<br><em>sais faire.</em></h2>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <div class="skill-group-icon">🌐</div>
+        <div class="skill-group-title">Réseau &amp; Infra</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Packet Tracer</span><span class="skill-tag">Ipcop</span>
+          <span class="skill-tag">Gestion des droits</span><span class="skill-tag">Prise en main distante</span>
+          <span class="skill-tag">Dépannage réseau</span><span class="skill-tag">Virtual Box</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-icon">🖥️</div>
+        <div class="skill-group-title">Hardware &amp; Maintenance</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Montage PC sur mesure</span><span class="skill-tag">Configuration système</span>
+          <span class="skill-tag">Diagnostic matériel</span><span class="skill-tag">Restauration système</span>
+          <span class="skill-tag">Adaptation sur mesure</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-icon">💻</div>
+        <div class="skill-group-title">Web &amp; Dev</div>
+        <div class="skill-tags">
+          <span class="skill-tag">HTML</span><span class="skill-tag">CSS</span>
+          <span class="skill-tag">Photoshop</span><span class="skill-tag">VisualCode</span>
+          <span class="skill-tag">Maintenance site web</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-icon">🔧</div>
+        <div class="skill-group-title">Logiciels maîtrisés</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Packet Tracer</span><span class="skill-tag">Virtual Box</span>
+          <span class="skill-tag">VisualCode</span><span class="skill-tag">Ipcop</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-icon">🗣️</div>
+        <div class="skill-group-title">Langues</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Français — Natif</span>
+          <span class="skill-tag">Anglais — Intermédiaire</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer><span>© 2025 Mael AKE</span><span>Étudiant en Réseau · Paris</span></footer>
+</div>
+
+<!-- ═══════════ PAGE XP ═══════════ -->
+<div class="page" id="page-xp">
+  <section>
+    <div class="section-label reveal">Expériences</div>
+    <h2 class="section-title reveal">Mon<br><em>parcours.</em></h2>
+    <div class="xp-list">
+      <div class="xp-item reveal">
+        <div><div class="xp-date">Mai 2025</div><div class="xp-cat">Maintenance</div></div>
+        <div>
+          <div class="xp-title">Maintenance d'un Réseau</div>
+          <ul class="xp-tasks">
+            <li>Dépannage de machines sur site</li>
+            <li>Prise en main à distance des équipements</li>
+            <li>Gestion des droits d'accès sur certaines machines</li>
+          </ul>
+        </div>
+      </div>
+      <div class="xp-item reveal">
+        <div><div class="xp-date">Juil. 2024</div><div class="xp-cat">Restauration</div></div>
+        <div>
+          <div class="xp-title">Équipier chez McDonald's</div>
+          <ul class="xp-tasks">
+            <li>Préparation en cuisine, respect des normes d'hygiène</li>
+            <li>Gestion des stocks et réapprovisionnement</li>
+          </ul>
+        </div>
+      </div>
+      <div class="xp-item reveal">
+        <div><div class="xp-date">Mai 2024</div><div class="xp-cat">Hardware</div></div>
+        <div>
+          <div class="xp-title">Montage de PC sur Mesure</div>
+          <ul class="xp-tasks">
+            <li>Configuration et assemblage selon cahier des charges</li>
+            <li>Adaptation des composants en fonction du besoin client</li>
+            <li>Restauration et remise en état de machines</li>
+          </ul>
+        </div>
+      </div>
+      <div class="xp-item reveal">
+        <div><div class="xp-date">Déc. 2023</div><div class="xp-cat">Maintenance web</div></div>
+        <div>
+          <div class="xp-title">Chargé de Maintenance de Site Internet</div>
+          <ul class="xp-tasks">
+            <li>Maintenance et mise à jour du site (HTML, CSS)</li>
+            <li>Retouches graphiques avec Photoshop</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer><span>© 2025 Mael AKE</span><span>Étudiant en Réseau · Paris</span></footer>
+</div>
+
+<!-- ═══════════ PAGE EDU ═══════════ -->
+<div class="page" id="page-edu">
+  <section>
+    <div class="section-label reveal">Formation</div>
+    <h2 class="section-title reveal">Mon parcours<br><em>scolaire.</em></h2>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-year">2026</div>
+        <div class="edu-degree">BTS SIO</div>
+        <div class="edu-school">Lycée de Cachan · Sept. 2024 – Sept. 2026</div>
+        <span class="edu-badge">En cours</span>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-year">2024</div>
+        <div class="edu-degree">Bac SN</div>
+        <div class="edu-school">Lycée Gustave Ferrier</div>
+        <span class="edu-badge">Obtenu</span>
+      </div>
+    </div>
+  </section>
+  <footer><span>© 2025 Mael AKE</span><span>Étudiant en Réseau · Paris</span></footer>
+</div>
+
+<!-- ═══════════ PAGE VEILLE ═══════════ -->
+<div class="page" id="page-veille">
+  <section>
+    <div class="section-label reveal">Veille technologique</div>
+    <h2 class="section-title reveal">Ce que je<br><em>surveille.</em></h2>
+
+    <p class="veille-intro reveal">Dans le cadre de mon BTS SIO, je réalise une <strong>veille technologique régulière</strong> pour rester informé des évolutions dans les domaines des réseaux, de la cybersécurité et des systèmes. Voici les principaux sujets que je suis.</p>
+
+    <div class="veille-grid">
+
+      <div class="veille-card reveal veille-card-featured" onclick="document.getElementById('wifi7-article').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;border-color:rgba(167,139,250,.35);background:rgba(167,139,250,.09);">
+        <div class="veille-icon">📡</div>
+        <div>
+          <div class="veille-theme" style="display:flex;align-items:center;gap:.5rem;">Réseaux <span style="background:rgba(167,139,250,.25);color:var(--accent3);font-size:.55rem;padding:.15rem .5rem;border-radius:99px;letter-spacing:.1em;">SUJET DÉTAILLÉ ↓</span></div>
+          <div class="veille-title">Wi-Fi 7 — IEEE 802.11be</div>
+        </div>
+        <div class="veille-desc">La nouvelle norme sans fil officialisée en 2025 : jusqu'à 46 Gbps, canaux 320 MHz, Multi-Link Operation et WPA3 obligatoire. La révolution pour les réseaux d'entreprise.</div>
+        <div class="veille-tags">
+          <span class="veille-tag">802.11be</span>
+          <span class="veille-tag">MLO</span>
+          <span class="veille-tag">4096-QAM</span>
+          <span class="veille-tag">WPA3</span>
+          <span class="veille-tag">46 Gbps</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ARTICLE WIFI 7 -->
+    <div id="wifi7-article" class="wifi7-article reveal">
+      <div class="wifi7-header">
+        <div class="wifi7-label">Analyse approfondie</div>
+        <h3 class="wifi7-title">Le Wi-Fi 7 <em>(IEEE 802.11be)</em><br>— La révolution des réseaux sans fil</h3>
+        <p class="wifi7-sub">Norme finalisée en 2025 · Pertinent pour les réseaux d'entreprise · BTS SIO Réseau</p>
+      </div>
+
+      <div class="wifi7-intro">
+        Le Wi-Fi 7, aussi appelé <strong>IEEE 802.11be</strong>, est la nouvelle génération de réseau sans fil qui succède au Wi-Fi 6 et 6E. Son surnom officiel est <strong>EHT — Extremely High Throughput</strong> ("débit extrêmement élevé"). Il apporte des avancées majeures en termes de débit, de stabilité et de gestion de la densité d'appareils, et devient en 2026 le nouveau standard pour les projets de connectivité haute performance en entreprise.
+      </div>
+
+      <div class="wifi7-compare">
+        <div class="wc-card">
+          <div class="wc-label">Wi-Fi 6 (ancienne norme)</div>
+          <div class="wc-val">9,6 <span>Gbps</span></div>
+          <div class="wc-bar-wrap"><div class="wc-bar" style="width:21%"></div></div>
+          <div class="wc-detail">Canaux 160 MHz · 1024-QAM</div>
+        </div>
+        <div class="wc-card wc-featured">
+          <div class="wc-label">Wi-Fi 7 (nouvelle norme)</div>
+          <div class="wc-val" style="color:var(--accent3)">46 <span>Gbps</span></div>
+          <div class="wc-bar-wrap"><div class="wc-bar" style="width:100%;background:linear-gradient(90deg,var(--accent2),var(--accent3))"></div></div>
+          <div class="wc-detail">Canaux 320 MHz · 4096-QAM · MLO</div>
+        </div>
+      </div>
+
+      <div class="wifi7-innovations">
+
+        <div class="wi-item reveal">
+          <div class="wi-num">01</div>
+          <div class="wi-content">
+            <div class="wi-title">Canaux de 320 MHz</div>
+            <div class="wi-desc">Les canaux à bande passante ultralarge de 320 MHz doublent la capacité de transmission par rapport aux canaux de 160 MHz du Wi-Fi 6. Imagine une autoroute à 8 voies au lieu de 4 : les données passent deux fois plus vite, sans embouteillage même quand beaucoup d'appareils sont connectés.</div>
+          </div>
+        </div>
+
+        <div class="wi-item reveal">
+          <div class="wi-num">02</div>
+          <div class="wi-content">
+            <div class="wi-title">MLO — Multi-Link Operation</div>
+            <div class="wi-desc">C'est <strong>la vraie révolution du Wi-Fi 7</strong>. Au lieu d'utiliser une seule bande de fréquence (2,4 GHz, 5 GHz ou 6 GHz), un appareil compatible peut se connecter simultanément à plusieurs bandes. Résultat : plus de débit cumulé, et si une bande est saturée, l'appareil bascule instantanément sur l'autre — zéro coupure, zéro latence.</div>
+          </div>
+        </div>
+
+        <div class="wi-item reveal">
+          <div class="wi-num">03</div>
+          <div class="wi-content">
+            <div class="wi-title">Modulation 4096-QAM</div>
+            <div class="wi-desc">La modulation 4096-QAM (contre 1024-QAM en Wi-Fi 6) permet à chaque signal de transporter plus d'informations par impulsion. Concrètement : +20% de débit théorique sur les mêmes conditions radio. C'est comme optimiser l'espace de chargement d'un camion pour transporter encore plus de boîtes sans changer le camion.</div>
+          </div>
+        </div>
+
+        <div class="wi-item reveal">
+          <div class="wi-num">04</div>
+          <div class="wi-content">
+            <div class="wi-title">Sécurité WPA3 obligatoire</div>
+            <div class="wi-desc">Le Wi-Fi 7 impose <strong>WPA3</strong> et les Protected Management Frames (PMF) comme obligatoires, là où c'était optionnel pour le Wi-Fi 6. Conséquence directe : le réseau est structurellement plus résistant aux attaques par dictionnaire, aux écoutes passives et aux attaques sur les trames de gestion.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="wifi7-impact reveal">
+        <div class="wi-impact-title">Ce que ça change pour un technicien réseau</div>
+        <div class="wi-impact-grid">
+          <div class="wi-impact-card">
+            <div class="wi-impact-icon">⚡</div>
+            <div class="wi-impact-label">Switching multigigabit requis</div>
+            <div class="wi-impact-desc">Le débit combiné dépasse 1 Gbps par point d'accès. Il faut du switching 2,5G ou 10G en amont — les anciens switches 1G ne suffisent plus.</div>
+          </div>
+          <div class="wi-impact-card">
+            <div class="wi-impact-icon">🔌</div>
+            <div class="wi-impact-label">PoE renforcé 802.3bt</div>
+            <div class="wi-impact-desc">Les points d'accès Wi-Fi 7 consomment plus. L'alimentation PoE standard (802.3af/at) ne suffit pas — il faut du 802.3bt (jusqu'à 90W).</div>
+          </div>
+          <div class="wi-impact-card">
+            <div class="wi-impact-icon">📋</div>
+            <div class="wi-impact-label">Compétences WPA3</div>
+            <div class="wi-impact-desc">La configuration et le dépannage WPA3 deviennent incontournables. Les méthodes d'authentification évoluent (SAE, OWE).</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="veille-sources-title reveal">Mes sources <em>de référence.</em></div>
+    <div class="veille-sources">
+      <div class="vsource reveal">
+        <div class="vsource-name">IEEE 802.11be</div>
+        <div class="vsource-type">Standard officiel</div>
+        <div class="vsource-desc">La spécification technique complète de la norme Wi-Fi 7 publiée par l'IEEE.</div>
+      </div>
+      <div class="vsource reveal">
+        <div class="vsource-name">Wi-Fi Alliance</div>
+        <div class="vsource-type">Organisation</div>
+        <div class="vsource-desc">L'organisme de certification officiel du Wi-Fi, publications et annonces sur le Wi-Fi 7.</div>
+      </div>
+      <div class="vsource reveal">
+        <div class="vsource-name">Cisco Blogs</div>
+        <div class="vsource-type">Réseau entreprise</div>
+        <div class="vsource-desc">Articles techniques sur le déploiement du Wi-Fi 7 en infrastructure d'entreprise.</div>
+      </div>
+      <div class="vsource reveal">
+        <div class="vsource-name">LeMagIT</div>
+        <div class="vsource-type">IT en français</div>
+        <div class="vsource-desc">Actualités et analyses sur l'adoption du Wi-Fi 7 dans les entreprises françaises.</div>
+      </div>
+    </div>
+
+  </section>
+  <footer><span>© 2025 Mael AKE</span><span>Étudiant en Réseau · Paris</span></footer>
+</div>
+
+<!-- ═══════════ PAGE CONTACT ═══════════ -->
+<div class="page" id="page-contact">
+  <section style="position:relative;">
+    <div class="contact-glow"></div>
+    <div class="contact-inner">
+      <div class="section-label reveal" style="justify-content:center;">Contact</div>
+      <h2 class="section-title reveal" style="margin-bottom:1rem;">Travaillons<br><em>ensemble.</em></h2>
+      <p style="color:var(--muted);font-size:.95rem;" class="reveal">Ouvert aux opportunités d'alternance et de stage dans les domaines réseau, IT et maintenance.</p>
+      <a href="mailto:maelake75@gmail.com" class="contact-email reveal">maelake75@gmail.com</a>
+      <div class="contact-links reveal">
+        <span class="contact-pill">📞 07 51 49 10 67</span>
+        <span class="contact-pill">📍 10 Rue Ernestine, Paris</span>
+        <span class="contact-pill">🌍 Anglais intermédiaire</span>
+      </div>
+    </div>
+  </section>
+  <footer><span>© 2025 Mael AKE</span><span>Étudiant en Réseau · Paris</span></footer>
+</div>
+
+<script>
+// ── CURSOR ──
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function ac(){cursor.style.left=mx+'px';cursor.style.top=my+'px';rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ac);})();
+
+// ── SPA ROUTER ──
+let current = 'home';
+
+const revealObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target);}});
+},{threshold:0.08});
+
+function showPage(id){
+  if(id===current) return;
+  const outEl = document.getElementById('page-'+current);
+  const inEl  = document.getElementById('page-'+id);
+  if(!inEl) return;
+
+  outEl.classList.add('leaving');
+  setTimeout(()=>{
+    outEl.classList.remove('active','visible','leaving');
+    window.scrollTo(0,0);
+    inEl.classList.add('active');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      inEl.classList.add('visible');
+      inEl.querySelectorAll('.reveal').forEach(el=>{
+        el.classList.remove('visible');
+        revealObs.observe(el);
+      });
+    }));
+  },240);
+
+  current = id;
+  document.querySelectorAll('[data-page]').forEach(el=>{
+    el.classList.toggle('active', el.dataset.page===id);
+  });
+}
+
+document.querySelectorAll('[data-page]').forEach(el=>{
+  el.addEventListener('click',e=>{
+    e.preventDefault();
+    const pg = el.dataset.page;
+    if(pg) showPage(pg);
+  });
+});
+
+// init
+const first = document.getElementById('page-home');
+first.classList.add('active');
+requestAnimationFrame(()=>requestAnimationFrame(()=>first.classList.add('visible')));
+
+// ── NEBULA CANVAS ──
+(function(){
+  const cv=document.getElementById('bg-canvas'),ctx=cv.getContext('2d');
+  let W,H,frame=0;
+  let mouseX=window.innerWidth/2,mouseY=window.innerHeight/2;
+  function resize(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+  window.addEventListener('mousemove',e=>{mouseX=e.clientX;mouseY=e.clientY;});
+
+  const STARS=Array.from({length:280},()=>({x:(Math.random()-.5)*2800,y:(Math.random()-.5)*2800,r:Math.random()*.9+.1,a:Math.random()*.4+.05,tw:Math.random()*Math.PI*2,sp:Math.random()*.012+.003}));
+  const ORBS=[
+    {x:.25,y:.3, r:380,h:270,s:75,l:25,a:.18,dx:.00008,dy:.00005},
+    {x:.75,y:.65,r:340,h:250,s:70,l:20,a:.14,dx:-.00006,dy:.00007},
+    {x:.5, y:.1, r:260,h:290,s:65,l:28,a:.10,dx:.00005,dy:-.00006},
+    {x:.15,y:.75,r:220,h:240,s:60,l:22,a:.09,dx:-.00007,dy:-.00004},
+    {x:.85,y:.2, r:300,h:210,s:80,l:18,a:.12,dx:.00004,dy:.00008},
+  ];
+  const PARTS=Array.from({length:120},()=>({x:(Math.random()-.5)*2000,y:(Math.random()-.5)*2000,r:Math.random()*1.6+.3,a:Math.random()*.6+.1,vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,hue:240+Math.random()*60,life:Math.random()*Math.PI*2}));
+
+  function draw(){
+    frame++;
+    const cx=W/2+(mouseX-W/2)*.015,cy=H/2+(mouseY-H/2)*.015;
+    ctx.clearRect(0,0,W,H);
+    const bg=ctx.createRadialGradient(cx,cy,0,cx,cy,Math.max(W,H)*.9);
+    bg.addColorStop(0,'#0a0a0a');bg.addColorStop(.4,'#060606');bg.addColorStop(1,'#020202');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    ORBS.forEach(o=>{
+      o.x+=o.dx;o.y+=o.dy;
+      if(o.x<-.1||o.x>1.1)o.dx*=-1;if(o.y<-.1||o.y>1.1)o.dy*=-1;
+      const ox=W*o.x,oy=H*o.y,pulse=1+.04*Math.sin(frame*.008+o.h);
+      ctx.save();ctx.filter=`blur(${o.r*.55}px)`;
+      const g=ctx.createRadialGradient(ox,oy,0,ox,oy,o.r*pulse);
+      g.addColorStop(0,`hsla(${o.h},${o.s}%,${o.l}%,${o.a*.35})`);
+      g.addColorStop(.5,`hsla(${o.h+20},${o.s-10}%,${o.l-5}%,${o.a*.12})`);
+      g.addColorStop(1,`hsla(${o.h},${o.s}%,${o.l}%,0)`);
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(ox,oy,o.r*pulse*1.5,0,Math.PI*2);ctx.fill();ctx.restore();
+    });
+    STARS.forEach(s=>{s.tw+=s.sp;ctx.beginPath();ctx.arc(cx+s.x,cy+s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(210,200,255,${s.a*(.65+.35*Math.sin(s.tw))})`;ctx.fill();});
+    PARTS.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.life+=.015;if(Math.abs(p.x)>1000)p.vx*=-1;if(Math.abs(p.y)>1000)p.vy*=-1;ctx.beginPath();ctx.arc(cx+p.x,cy+p.y,p.r,0,Math.PI*2);ctx.fillStyle=`hsla(${p.hue},80%,75%,${p.a*(.6+.4*Math.sin(p.life))})`;ctx.fill();});
+    const vig=ctx.createRadialGradient(W/2,H/2,H*.3,W/2,H/2,Math.max(W,H)*.75);
+    vig.addColorStop(0,'rgba(0,0,0,0)');vig.addColorStop(1,'rgba(0,0,0,.75)');
+    ctx.fillStyle=vig;ctx.fillRect(0,0,W,H);
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
 </body>
 </html>
