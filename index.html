@@ -141,6 +141,38 @@ footer {
   backdrop-filter: blur(12px);
 }
 
+.btn-cv {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: rgba(255,255,255,.05);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif; font-weight: 500;
+  font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+  padding: .9rem 2.2rem; border-radius: 99px; text-decoration: none;
+  border: 1px solid rgba(255,255,255,.15);
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.btn-cv:hover {
+  background: rgba(167,139,250,.15);
+  border-color: rgba(167,139,250,.4);
+  color: var(--accent3);
+  transform: translateY(-2px);
+}
+.btn-cv svg { flex-shrink: 0; }
+
+.btn-cv-contact {
+  display: inline-flex; align-items: center; gap: .6rem;
+  margin-top: 2.5rem;
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  color: #fff;
+  font-family: 'DM Sans', sans-serif; font-weight: 500;
+  font-size: .82rem; letter-spacing: .1em; text-transform: uppercase;
+  padding: 1rem 2.5rem; border-radius: 99px; text-decoration: none;
+  border: none;
+  transition: opacity .2s, transform .2s;
+}
+.btn-cv-contact:hover { opacity: .88; transform: translateY(-2px); }
+.btn-cv-contact svg { flex-shrink: 0; }
+
 /* BUTTONS */
 .btn-primary {
   display: inline-flex; align-items: center; gap: .5rem;
@@ -563,6 +595,10 @@ footer {
       <div class="hero-cta">
         <a class="btn-primary" data-page="xp">Mes expériences →</a>
         <a class="btn-outline" data-page="contact">Me contacter</a>
+        <a href="CV_professionnel_gris_simple.pdf" download="CV_Mael_AKE.pdf" class="btn-cv">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Télécharger mon CV
+        </a>
       </div>
     </div>
     <div class="hero-right">
@@ -902,10 +938,15 @@ footer {
         <span class="contact-pill">📍 10 Rue Ernestine, Paris</span>
         <span class="contact-pill">🌍 Anglais intermédiaire</span>
       </div>
+      <a href="CV_professionnel_gris_simple.pdf" download="CV_Mael_AKE.pdf" class="btn-cv-contact reveal">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Télécharger mon CV
+      </a>
     </div>
   </section>
   <footer><span>© 2025 Mael AKE</span><span>Étudiant en Réseau · Paris</span></footer>
 </div>
+
 
 <script>
 // ── CURSOR ──
@@ -927,7 +968,6 @@ function showPage(id){
   const outEl = document.getElementById('page-'+current);
   const inEl  = document.getElementById('page-'+id);
   if(!inEl) return;
-
   outEl.classList.add('leaving');
   setTimeout(()=>{
     outEl.classList.remove('active','visible','leaving');
@@ -941,7 +981,6 @@ function showPage(id){
       });
     }));
   },240);
-
   current = id;
   document.querySelectorAll('[data-page]').forEach(el=>{
     el.classList.toggle('active', el.dataset.page===id);
