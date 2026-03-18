@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -345,25 +345,145 @@ footer {
 .xp-tasks li { font-size: .87rem; color: var(--muted); line-height: 1.6; display: flex; align-items: baseline; gap: .6rem; }
 .xp-tasks li::before { content: '◆'; color: var(--accent); font-size: .45rem; flex-shrink: 0; position: relative; top: -1px; }
 
-/* ─── EDUCATION ─── */
-.edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
-.edu-card {
+/* ─── BTS SIO DÉROULEMENT ─── */
+.bts-intro {
+  font-size: .97rem; line-height: 1.9; color: rgba(200,190,255,.6);
+  max-width: 680px; margin-bottom: 3.5rem;
+}
+.bts-intro strong { color: var(--white); font-weight: 500; }
+
+/* Timeline des années */
+.bts-timeline {
+  display: flex; flex-direction: column; gap: 0; margin-bottom: 4rem; position: relative;
+}
+.bts-timeline::before {
+  content: ''; position: absolute; left: 155px; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(180deg, var(--accent), rgba(167,139,250,.1));
+  pointer-events: none;
+}
+.bts-year-block {
+  display: grid; grid-template-columns: 190px 1fr;
+  gap: 3rem; padding: 2.8rem 0;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.bts-year-block:last-child { border-bottom: 1px solid rgba(255,255,255,.06); }
+.bts-year-left { padding-top: .25rem; }
+.bts-year-label {
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  font-size: 1.5rem; color: var(--accent3); line-height: 1; margin-bottom: .3rem;
+}
+.bts-year-sub {
+  font-size: .68rem; color: var(--muted2); letter-spacing: .1em; text-transform: uppercase;
+}
+.bts-year-dot {
+  width: 10px; height: 10px; background: var(--accent);
+  border-radius: 50%; margin-top: 1.2rem;
+  box-shadow: 0 0 10px var(--accent);
+}
+.bts-year-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  font-size: 1.3rem; color: var(--white); margin-bottom: 1rem;
+}
+.bts-year-desc {
+  font-size: .88rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.5rem;
+}
+
+/* Matières par blocs */
+.bts-modules { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+.bts-module {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 14px; padding: 1.2rem 1.4rem;
+  transition: background .2s, border-color .2s;
+}
+.bts-module:hover { background: var(--glass-hover); border-color: rgba(167,139,250,.3); }
+.bts-module-label {
+  font-size: .6rem; color: var(--accent); letter-spacing: .15em; text-transform: uppercase;
+  margin-bottom: .4rem;
+}
+.bts-module-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 600;
+  font-size: .95rem; color: var(--white); margin-bottom: .5rem;
+}
+.bts-module-tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+.bts-module-tag {
+  font-size: .64rem; color: var(--accent3);
+  background: rgba(167,139,250,.08); border: 1px solid rgba(167,139,250,.15);
+  padding: .18rem .6rem; border-radius: 99px;
+}
+
+/* Stage card dans la timeline */
+.bts-stage {
+  display: flex; align-items: center; gap: 1rem;
+  background: rgba(167,139,250,.07); border: 1px solid rgba(167,139,250,.2);
+  border-radius: 14px; padding: 1.1rem 1.4rem;
+  margin-top: .5rem;
+}
+.bts-stage-icon {
+  width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+  background: rgba(167,139,250,.15); border: 1px solid rgba(167,139,250,.25);
+  display: flex; align-items: center; justify-content: center; font-size: 1rem;
+}
+.bts-stage-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 600;
+  font-size: .9rem; color: var(--white);
+}
+.bts-stage-sub { font-size: .74rem; color: var(--muted); margin-top: .15rem; }
+
+/* Grille des blocs de compétences BTS */
+.bts-blocs-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  font-size: 1.6rem; color: var(--white); margin-bottom: 1.5rem;
+}
+.bts-blocs-title em { font-style: italic; color: var(--accent3); }
+.bts-blocs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-bottom: 4rem; }
+.bts-bloc {
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 20px; padding: 1.8rem; backdrop-filter: blur(14px);
+  position: relative; overflow: hidden;
+  transition: background .25s, border-color .25s, transform .25s;
+}
+.bts-bloc:hover { background: var(--glass-hover); border-color: rgba(167,139,250,.3); transform: translateY(-4px); }
+.bts-bloc::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transform: scaleX(0); transform-origin: left; transition: transform .4s;
+}
+.bts-bloc:hover::before { transform: scaleX(1); }
+.bts-bloc-num {
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  font-size: 3rem; color: rgba(167,139,250,.1); line-height: 1; margin-bottom: .8rem;
+}
+.bts-bloc-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  font-size: 1rem; color: var(--white); margin-bottom: .5rem;
+}
+.bts-bloc-desc { font-size: .78rem; color: var(--muted); line-height: 1.65; }
+
+/* Diplômes */
+.bts-diplomes { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.bts-diplome {
   background: var(--glass); border: 1px solid var(--glass-border);
   border-radius: 20px; padding: 2.2rem; backdrop-filter: blur(14px);
   position: relative; overflow: hidden;
   transition: background .25s, border-color .25s, transform .25s;
 }
-.edu-card:hover { background: var(--glass-hover); border-color: rgba(167,139,250,.3); transform: translateY(-4px); }
-.edu-card::before {
+.bts-diplome:hover { background: var(--glass-hover); border-color: rgba(167,139,250,.3); transform: translateY(-4px); }
+.bts-diplome::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
   transform: scaleX(0); transform-origin: left; transition: transform .4s;
 }
-.edu-card:hover::before { transform: scaleX(1); }
-.edu-year { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 3rem; color: rgba(167,139,250,.12); line-height: 1; margin-bottom: 1rem; }
-.edu-degree { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.2rem; margin-bottom: .4rem; }
-.edu-school { font-size: .82rem; color: var(--muted); }
-.edu-badge {
+.bts-diplome:hover::before { transform: scaleX(1); }
+.bts-diplome-year {
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  font-size: 3rem; color: rgba(167,139,250,.12); line-height: 1; margin-bottom: 1rem;
+}
+.bts-diplome-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 700;
+  font-size: 1.2rem; margin-bottom: .4rem; color: var(--white);
+}
+.bts-diplome-school { font-size: .82rem; color: var(--muted); }
+.bts-diplome-badge {
   display: inline-block; margin-top: 1rem;
   font-size: .68rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
   color: var(--accent3); background: rgba(167,139,250,.1);
@@ -429,7 +549,6 @@ footer {
 }
 .wifi7-intro strong { color: var(--white); font-weight: 500; }
 
-/* compare bars */
 .wifi7-compare {
   display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
   margin-bottom: 3rem;
@@ -446,7 +565,6 @@ footer {
 .wc-bar { height: 100%; background: rgba(167,139,250,.4); border-radius: 4px; }
 .wc-detail { font-size: .72rem; color: var(--muted2); }
 
-/* innovations list */
 .wifi7-innovations { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 3rem; }
 .wi-item {
   display: grid; grid-template-columns: 60px 1fr; gap: 1.5rem; align-items: start;
@@ -466,7 +584,6 @@ footer {
 .wi-desc { font-size: .85rem; color: var(--muted); line-height: 1.75; }
 .wi-desc strong { color: var(--accent3); font-weight: 500; }
 
-/* impact */
 .wifi7-impact { background: rgba(167,139,250,.06); border: 1px solid rgba(167,139,250,.15); border-radius: 16px; padding: 2rem; }
 .wi-impact-title {
   font-family: 'Cormorant Garamond', serif; font-weight: 700;
@@ -482,13 +599,6 @@ footer {
 .wi-impact-icon { font-size: 1.3rem; margin-bottom: .6rem; }
 .wi-impact-label { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: .95rem; color: var(--accent3); margin-bottom: .4rem; }
 .wi-impact-desc { font-size: .75rem; color: var(--muted); line-height: 1.6; }
-
-@media (max-width: 900px) {
-  .wifi7-article { padding: 1.5rem; }
-  .wifi7-compare { grid-template-columns: 1fr; }
-  .wi-impact-grid { grid-template-columns: 1fr; }
-  .wi-item { grid-template-columns: 40px 1fr; gap: 1rem; }
-}
 
 /* ─── VEILLE ─── */
 .veille-intro {
@@ -559,9 +669,17 @@ footer {
   .about-grid { grid-template-columns: 1fr; gap: 3rem; }
   .skills-grid { grid-template-columns: 1fr; }
   .xp-item { grid-template-columns: 1fr; gap: .6rem; }
-  .edu-grid { grid-template-columns: 1fr; }
+  .bts-year-block { grid-template-columns: 1fr; gap: .6rem; }
+  .bts-timeline::before { display: none; }
+  .bts-modules { grid-template-columns: 1fr; }
+  .bts-blocs { grid-template-columns: 1fr; }
+  .bts-diplomes { grid-template-columns: 1fr; }
   .veille-grid { grid-template-columns: 1fr; }
   .veille-sources { grid-template-columns: 1fr 1fr; }
+  .wifi7-article { padding: 1.5rem; }
+  .wifi7-compare { grid-template-columns: 1fr; }
+  .wi-impact-grid { grid-template-columns: 1fr; }
+  .wi-item { grid-template-columns: 40px 1fr; gap: 1rem; }
 }
 </style>
 </head>
@@ -759,25 +877,177 @@ footer {
   <footer><span>© 2025 Mael AKE</span><span>Étudiant en Réseau · Paris</span></footer>
 </div>
 
-<!-- ═══════════ PAGE EDU ═══════════ -->
+<!-- ═══════════ PAGE EDU — DÉROULEMENT BTS SIO ═══════════ -->
 <div class="page" id="page-edu">
   <section>
     <div class="section-label reveal">Formation</div>
-    <h2 class="section-title reveal">Mon parcours<br><em>scolaire.</em></h2>
-    <div class="edu-grid">
-      <div class="edu-card reveal">
-        <div class="edu-year">2026</div>
-        <div class="edu-degree">BTS SIO</div>
-        <div class="edu-school">Lycée de Cachan · Sept. 2024 – Sept. 2026</div>
-        <span class="edu-badge">En cours</span>
+    <h2 class="section-title reveal">Déroulement de<br><em>mon BTS SIO.</em></h2>
+
+    <p class="bts-intro reveal">
+      Le <strong>BTS Services Informatiques aux Organisations (SIO)</strong> se déroule sur deux ans au Lycée de Cachan. J'ai choisi l'option <strong>SISR — Solutions d'Infrastructure, Systèmes et Réseaux</strong>, orientée administration réseau, sécurité et maintenance des systèmes informatiques.
+    </p>
+
+    <!-- TIMELINE 2 ANS -->
+    <div class="bts-timeline">
+
+      <!-- ANNÉE 1 -->
+      <div class="bts-year-block reveal">
+        <div class="bts-year-left">
+          <div class="bts-year-label">2024 – 2025</div>
+          <div class="bts-year-sub">1ère année</div>
+          <div class="bts-year-dot"></div>
+        </div>
+        <div>
+          <div class="bts-year-title">Fondamentaux & Découverte</div>
+          <div class="bts-year-desc">
+            La première année pose les bases théoriques et pratiques : découverte des infrastructures réseau, initiation à l'administration système, et premiers projets professionnels. On aborde les protocoles fondamentaux, la virtualisation et la sécurité des accès.
+          </div>
+          <div class="bts-modules">
+            <div class="bts-module">
+              <div class="bts-module-label">Culture générale</div>
+              <div class="bts-module-title">Français & Communication</div>
+              <div class="bts-module-tags">
+                <span class="bts-module-tag">Expression écrite</span>
+                <span class="bts-module-tag">Synthèse</span>
+                <span class="bts-module-tag">Oral professionnel</span>
+              </div>
+            </div>
+            <div class="bts-module">
+              <div class="bts-module-label">Langues</div>
+              <div class="bts-module-title">Anglais Technique</div>
+              <div class="bts-module-tags">
+                <span class="bts-module-tag">Documentation IT</span>
+                <span class="bts-module-tag">Vocabulaire réseau</span>
+              </div>
+            </div>
+            <div class="bts-module">
+              <div class="bts-module-label">Bloc technique</div>
+              <div class="bts-module-title">Réseaux & Systèmes</div>
+              <div class="bts-module-tags">
+                <span class="bts-module-tag">TCP/IP</span>
+                <span class="bts-module-tag">Packet Tracer</span>
+                <span class="bts-module-tag">VirtualBox</span>
+                <span class="bts-module-tag">Active Directory</span>
+              </div>
+            </div>
+            <div class="bts-module">
+              <div class="bts-module-label">Bloc technique</div>
+              <div class="bts-module-title">Cybersécurité & Droits</div>
+              <div class="bts-module-tags">
+                <span class="bts-module-tag">Gestion des droits</span>
+                <span class="bts-module-tag">Pare-feu</span>
+                <span class="bts-module-tag">Ipcop</span>
+              </div>
+            </div>
+          </div>
+          <div class="bts-stage">
+            <div class="bts-stage-icon">🏢</div>
+            <div>
+              <div class="bts-stage-title">Stage de 1ère année — Mai 2025</div>
+              <div class="bts-stage-sub">Maintenance réseau · Dépannage, prise en main distante, gestion des droits d'accès</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="edu-card reveal">
-        <div class="edu-year">2024</div>
-        <div class="edu-degree">Bac SN</div>
-        <div class="edu-school">Lycée Gustave Ferrier</div>
-        <span class="edu-badge">Obtenu</span>
+
+      <!-- ANNÉE 2 -->
+      <div class="bts-year-block reveal">
+        <div class="bts-year-left">
+          <div class="bts-year-label">2025 – 2026</div>
+          <div class="bts-year-sub">2ème année</div>
+          <div class="bts-year-dot"></div>
+        </div>
+        <div>
+          <div class="bts-year-title">Approfondissement & Projets</div>
+          <div class="bts-year-desc">
+            La deuxième année monte en compétences sur la supervision, la sécurité avancée et la gestion de projets IT. Les épreuves E4, E5 et E6 du BTS SIO valident des réalisations professionnelles concrètes.
+          </div>
+          <div class="bts-modules">
+            <div class="bts-module">
+              <div class="bts-module-label">Bloc technique avancé</div>
+              <div class="bts-module-title">Administration Avancée</div>
+              <div class="bts-module-tags">
+                <span class="bts-module-tag">Supervision réseau</span>
+                <span class="bts-module-tag">Scripting</span>
+                <span class="bts-module-tag">VLAN</span>
+                <span class="bts-module-tag">Routage</span>
+              </div>
+            </div>
+            <div class="bts-module">
+              <div class="bts-module-label">Bloc technique avancé</div>
+              <div class="bts-module-title">Sécurité des SI</div>
+              <div class="bts-module-tags">
+                <span class="bts-module-tag">WPA3</span>
+                <span class="bts-module-tag">Chiffrement</span>
+                <span class="bts-module-tag">Audit sécurité</span>
+              </div>
+            </div>
+            <div class="bts-module">
+              <div class="bts-module-label">Épreuve BTS</div>
+              <div class="bts-module-title">E4 — Support & Mise à dispo.</div>
+              <div class="bts-module-tags">
+                <span class="bts-module-tag">Dossier professionnel</span>
+                <span class="bts-module-tag">Situations réelles</span>
+              </div>
+            </div>
+            <div class="bts-module">
+              <div class="bts-module-label">Épreuve BTS</div>
+              <div class="bts-module-title">E5 — Administration</div>
+              <div class="bts-module-tags">
+                <span class="bts-module-tag">Infrastructure réseau</span>
+                <span class="bts-module-tag">Oral technique</span>
+              </div>
+            </div>
+          </div>
+          <div class="bts-stage">
+            <div class="bts-stage-icon">🎓</div>
+            <div>
+              <div class="bts-stage-title">Diplôme BTS SIO — Sept. 2026</div>
+              <div class="bts-stage-sub">Option SISR · Lycée de Cachan · Soutenance finale et épreuves professionnelles</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BLOCS DE COMPÉTENCES -->
+    <div class="bts-blocs-title reveal">Les blocs de <em>compétences.</em></div>
+    <div class="bts-blocs">
+      <div class="bts-bloc reveal">
+        <div class="bts-bloc-num">B1</div>
+        <div class="bts-bloc-title">Support & Mise à disposition de services</div>
+        <div class="bts-bloc-desc">Gérer le patrimoine informatique, répondre aux incidents, développer la présence en ligne et travailler en mode projet.</div>
+      </div>
+      <div class="bts-bloc reveal">
+        <div class="bts-bloc-num">B2</div>
+        <div class="bts-bloc-title">Administration des systèmes & réseaux</div>
+        <div class="bts-bloc-desc">Exploiter, administrer et sécuriser les infrastructures, superviser et garantir la disponibilité des services.</div>
+      </div>
+      <div class="bts-bloc reveal">
+        <div class="bts-bloc-num">B3</div>
+        <div class="bts-bloc-title">Cybersécurité des services informatiques</div>
+        <div class="bts-bloc-desc">Protéger les données, gérer les identités, sécuriser les échanges et assurer la continuité des services.</div>
       </div>
     </div>
+
+    <!-- DIPLÔMES -->
+    <div class="bts-blocs-title reveal">Mon parcours <em>diplômant.</em></div>
+    <div class="bts-diplomes">
+      <div class="bts-diplome reveal">
+        <div class="bts-diplome-year">2026</div>
+        <div class="bts-diplome-title">BTS SIO — Option SISR</div>
+        <div class="bts-diplome-school">Lycée de Cachan · Sept. 2024 – Sept. 2026</div>
+        <span class="bts-diplome-badge">En cours</span>
+      </div>
+      <div class="bts-diplome reveal">
+        <div class="bts-diplome-year">2024</div>
+        <div class="bts-diplome-title">Bac SN — Sciences du Numérique</div>
+        <div class="bts-diplome-school">Lycée Gustave Ferrier</div>
+        <span class="bts-diplome-badge">Obtenu</span>
+      </div>
+    </div>
+
   </section>
   <footer><span>© 2025 Mael AKE</span><span>Étudiant en Réseau · Paris</span></footer>
 </div>
@@ -791,7 +1061,6 @@ footer {
     <p class="veille-intro reveal">Dans le cadre de mon BTS SIO, je réalise une <strong>veille technologique régulière</strong> pour rester informé des évolutions dans les domaines des réseaux, de la cybersécurité et des systèmes. Voici les principaux sujets que je suis.</p>
 
     <div class="veille-grid">
-
       <div class="veille-card reveal veille-card-featured" onclick="document.getElementById('wifi7-article').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;border-color:rgba(167,139,250,.35);background:rgba(167,139,250,.09);">
         <div class="veille-icon">📡</div>
         <div>
@@ -807,7 +1076,6 @@ footer {
           <span class="veille-tag">46 Gbps</span>
         </div>
       </div>
-
     </div>
 
     <!-- ARTICLE WIFI 7 -->
@@ -817,11 +1085,9 @@ footer {
         <h3 class="wifi7-title">Le Wi-Fi 7 <em>(IEEE 802.11be)</em><br>— La révolution des réseaux sans fil</h3>
         <p class="wifi7-sub">Norme finalisée en 2025 · Pertinent pour les réseaux d'entreprise · BTS SIO Réseau</p>
       </div>
-
       <div class="wifi7-intro">
         Le Wi-Fi 7, aussi appelé <strong>IEEE 802.11be</strong>, est la nouvelle génération de réseau sans fil qui succède au Wi-Fi 6 et 6E. Son surnom officiel est <strong>EHT — Extremely High Throughput</strong> ("débit extrêmement élevé"). Il apporte des avancées majeures en termes de débit, de stabilité et de gestion de la densité d'appareils, et devient en 2026 le nouveau standard pour les projets de connectivité haute performance en entreprise.
       </div>
-
       <div class="wifi7-compare">
         <div class="wc-card">
           <div class="wc-label">Wi-Fi 6 (ancienne norme)</div>
@@ -836,9 +1102,7 @@ footer {
           <div class="wc-detail">Canaux 320 MHz · 4096-QAM · MLO</div>
         </div>
       </div>
-
       <div class="wifi7-innovations">
-
         <div class="wi-item reveal">
           <div class="wi-num">01</div>
           <div class="wi-content">
@@ -846,7 +1110,6 @@ footer {
             <div class="wi-desc">Les canaux à bande passante ultralarge de 320 MHz doublent la capacité de transmission par rapport aux canaux de 160 MHz du Wi-Fi 6. Imagine une autoroute à 8 voies au lieu de 4 : les données passent deux fois plus vite, sans embouteillage même quand beaucoup d'appareils sont connectés.</div>
           </div>
         </div>
-
         <div class="wi-item reveal">
           <div class="wi-num">02</div>
           <div class="wi-content">
@@ -854,7 +1117,6 @@ footer {
             <div class="wi-desc">C'est <strong>la vraie révolution du Wi-Fi 7</strong>. Au lieu d'utiliser une seule bande de fréquence (2,4 GHz, 5 GHz ou 6 GHz), un appareil compatible peut se connecter simultanément à plusieurs bandes. Résultat : plus de débit cumulé, et si une bande est saturée, l'appareil bascule instantanément sur l'autre — zéro coupure, zéro latence.</div>
           </div>
         </div>
-
         <div class="wi-item reveal">
           <div class="wi-num">03</div>
           <div class="wi-content">
@@ -862,7 +1124,6 @@ footer {
             <div class="wi-desc">La modulation 4096-QAM (contre 1024-QAM en Wi-Fi 6) permet à chaque signal de transporter plus d'informations par impulsion. Concrètement : +20% de débit théorique sur les mêmes conditions radio. C'est comme optimiser l'espace de chargement d'un camion pour transporter encore plus de boîtes sans changer le camion.</div>
           </div>
         </div>
-
         <div class="wi-item reveal">
           <div class="wi-num">04</div>
           <div class="wi-content">
@@ -870,9 +1131,7 @@ footer {
             <div class="wi-desc">Le Wi-Fi 7 impose <strong>WPA3</strong> et les Protected Management Frames (PMF) comme obligatoires, là où c'était optionnel pour le Wi-Fi 6. Conséquence directe : le réseau est structurellement plus résistant aux attaques par dictionnaire, aux écoutes passives et aux attaques sur les trames de gestion.</div>
           </div>
         </div>
-
       </div>
-
       <div class="wifi7-impact reveal">
         <div class="wi-impact-title">Ce que ça change pour un technicien réseau</div>
         <div class="wi-impact-grid">
@@ -893,7 +1152,6 @@ footer {
           </div>
         </div>
       </div>
-
     </div>
 
     <div class="veille-sources-title reveal">Mes sources <em>de référence.</em></div>
